@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node server/server.js",
-    "server":"nodemon server/server.js",
-    "client":"npm start --prefix client",
-    "dev":"concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -28,6 +28,7 @@
     "mongoose-aggregate-paginate-v2": "^1.0.42",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "validator": "^13.5.2",
     "xss-clean": "^0.1.1"
   }
 }
