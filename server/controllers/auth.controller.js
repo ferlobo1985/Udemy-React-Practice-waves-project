@@ -9,7 +9,8 @@ const authController = {
             const token = await authService.genAuthToken(user)
 
             //// send register email
-            res.cookie('x-access-token',token).status(httpStatus.CREATED).send({
+            res.cookie('x-access-token',token)
+            .status(httpStatus.CREATED).send({
                 user,
                 token
             });
@@ -32,9 +33,6 @@ const authController = {
     },
     async isauth(req, res, next){
         res.json(req.user)
-    },
-    async dog(req, res, next){
-        res.json({ok:'yes'})
     }
 }
 
