@@ -50,7 +50,7 @@ const updateUserEmail = async(req) => {
             {
                 "$set":{ 
                     email: req.body.newemail,
-                    varified:false
+                    verified:false
                 }
             },
             { new: true }
