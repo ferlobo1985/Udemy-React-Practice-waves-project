@@ -7,7 +7,7 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const routes = require('./routes');
 
-const { handleError } = require('./middleware/apiError');
+const { handleError, convertToApiError } = require('./middleware/apiError');
 
 
 // mongodb+srv://admin:<password>@cluster0.kbuow.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -37,6 +37,7 @@ app.use('/api',routes)
 
 /// HANDLE ERRORS
 /// if the error not recognized....convert to api error
+app.use(convertToApiError);
 app.use((err,req,res,next)=>{
     handleError(err,res)
 })
