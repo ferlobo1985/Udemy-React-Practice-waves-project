@@ -36,6 +36,7 @@ app.use('/api',routes)
 
 
 /// HANDLE ERRORS
+/// if the error not recognized....convert to api error
 app.use((err,req,res,next)=>{
     handleError(err,res)
 })

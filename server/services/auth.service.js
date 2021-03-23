@@ -5,7 +5,7 @@ const { ApiError } = require('../middleware/apiError');
 const createUser = async(email,password) => {
     try{
         if(await User.emailTaken(email)){
-          throw new ApiError(httpStatus.BAD_REQUEST, 'Sorry email taken');
+            throw new ApiError(httpStatus.BAD_REQUEST, 'Sorry email taken');
         }
 
         const user = new User({
