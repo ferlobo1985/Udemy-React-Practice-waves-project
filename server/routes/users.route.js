@@ -9,7 +9,7 @@ router.route('/profile')
 .patch(auth('updateOwn','profile'),usersController.updateProfile)
 
 router.patch('/email',auth('updateOwn','profile'), usersController.updateUserEmail);
-
+router.get('/verify', usersController.verifyAccount)
 /// 
 
 

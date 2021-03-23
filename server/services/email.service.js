@@ -15,7 +15,6 @@ let transporter = nodemailer.createTransport({
 const registerEmail = async(userEmail,user) => {
     try{
         const emailToken = user.generateRegisterToken();
-
         let mailGenerator =  new Mailgen({
             theme:"default",
             product:{
@@ -40,11 +39,22 @@ const registerEmail = async(userEmail,user) => {
             }
         }
 
+        let emailBody = mailGenerator.generate(email);
+        let message = {
+            from: process.env.EMAIL,
+            to:userEmail,
+            subject:"Welcome to waves",
+            html: emailBody
+        };
 
-        
-
-
+        await transporter.sendMail(message);
+        return true
     } catch(error){
         throw error
     }
+}
+
+
+module.exports = {
+    registerEmail
 }
