@@ -5,11 +5,13 @@ const authController = {
         try{
             const { email, password } = req.body;
             const user = await authService.createUser(email, password);
+            const token = await authService.genAuthToken(user)
 
-            res.status(200).send({
-                user
-            })
 
+            res.cookie('x-access-token',token).status(200).send({
+                user,
+                token
+            });
         } catch( error){
             console.log(error)
         }
