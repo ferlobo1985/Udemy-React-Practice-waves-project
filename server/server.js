@@ -5,7 +5,9 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
-const routes = require('./routes')
+const routes = require('./routes');
+
+const { handleError } = require('./middleware/apiError');
 
 
 // mongodb+srv://admin:<password>@cluster0.kbuow.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -28,12 +30,15 @@ app.use(express.json())
 app.use(xss());
 app.use(mongoSanitize());
 
+
 /// routes
 app.use('/api',routes)
 
 
-
-
+/// HANDLE ERRORS
+app.use((err,req,res,next)=>{
+    handleError(err,res)
+})
 
 const port = process.env.PORT || 3001
 app.listen(port,()=>{
