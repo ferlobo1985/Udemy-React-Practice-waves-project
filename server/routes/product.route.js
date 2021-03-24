@@ -10,6 +10,10 @@ router.post('/', auth('createAny','product'),addProductValidator, productsContro
 router.route('/product/:id')
 .get(productsController.getProductById)
 .patch(auth('updateAny','product'),productsController.updateProductById)
-.delete(auth('deleteAny','product'),productsController.deleteProductById)
+.delete(auth('deleteAny','product'),productsController.deleteProductById);
+
+router.get('/all', productsController.allProducts);
+
+
 
 module.exports = router;

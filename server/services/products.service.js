@@ -48,11 +48,28 @@ const deleteProductById = async( _id  ) => {
     }
 }
 
+const allProducts = async(req) => {
+    try {
+        const products = await Product
+        .find({})
+        .populate('brand')
+        .sort([
+            [req.query.sortBy,req.query.order]
+        ])
+        .limit(parseInt(req.query.limit));
+
+        return products
+    } catch(error) {
+        throw error
+    }
+}
+
 
 
 module.exports = {
     addProduct,
     getProductById,
     updateProductById,
-    deleteProductById
+    deleteProductById,
+    allProducts
 }
