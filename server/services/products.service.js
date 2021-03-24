@@ -72,8 +72,8 @@ const paginateProducts = async(req) => {
         // const example = {
         //     "keywords":"elite",
         //     "brand":["605ad1e70738255874af0972","605ad1e70738255874af0972"],
-        //     "lt":200,
-        //     "gt":500,
+        //     "min":200,
+        //     "max":500,
         //     "frets":24
         // }
 
@@ -102,7 +102,31 @@ const paginateProducts = async(req) => {
             });
         }
        
-    
+        if(req.body.min && req.body.min > 0 || req.body.max && req.body.max < 5000){
+            /// { $range: { price:[0,100 ]}} /// not supported
+
+            if(req.body.min){
+                aggQueryArray.push({ $match: { price:{ $gt: req.body.min }}});
+                /// minimum price , guitar with a price greater than xxx
+            }
+            if(req.body.max){
+                aggQueryArray.push({ $match: { price:{ $lt: req.body.max }}});
+                /// maximum price , guitar with a price lower than xxx
+            }
+        }
+
+        //// add populate
+        aggQueryArray.push(
+            { $lookup:
+                {
+                    from: "brands",
+                    localField: "brand",
+                    foreignField:"_id",
+                    as: "brand"
+                }
+            },
+            { $unwind: '$brand'}
+        )    
         /////////
 
         let aggQuery = Product.aggregate(aggQueryArray);
