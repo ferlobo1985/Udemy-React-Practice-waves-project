@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const usersRoute = require('./users.route');
 const brandsRoute = require('./brand.route');
 const productsRoute = require('./product.route');
+const siteRoute = require('./site.route');
 const router = express.Router();
 
 const routesIndex = [
@@ -21,6 +22,10 @@ const routesIndex = [
     {
         path:'/products',
         route: productsRoute 
+    },
+    {
+        path:'/site',
+        route: siteRoute 
     }
 ]
 
