@@ -1,6 +1,7 @@
 const { Product } = require('../models/product');
 const { ApiError } = require('../middleware/apiError');
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 
 const addProduct = async( body ) => {
     try {
@@ -79,6 +80,29 @@ const paginateProducts = async(req) => {
         let aggQueryArray = [];
 
 
+        if(req.body.keywords && req.body.keywords != ''){
+            const re = new RegExp(`${req.body.keywords}`,'gi');
+            aggQueryArray.push({
+                $match:{ model:{ $regex:re }}
+            });
+        }
+
+        if(req.body.brand && req.body.brand.length > 0){
+            let newBrandsArray = req.body.brand.map((item)=>(
+                mongoose.Types.ObjectId(item)
+            ));
+            aggQueryArray.push({
+                $match:{ brand:{ $in: newBrandsArray }}
+            });
+        }
+
+        if(req.body.frets && req.body.frets.length > 0){
+            aggQueryArray.push({
+                $match:{ frets: { $in: req.body.frets }}
+            });
+        }
+       
+    
         /////////
 
         let aggQuery = Product.aggregate(aggQueryArray);
