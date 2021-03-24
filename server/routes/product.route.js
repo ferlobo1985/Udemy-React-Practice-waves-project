@@ -13,6 +13,7 @@ router.route('/product/:id')
 .delete(auth('deleteAny','product'),productsController.deleteProductById);
 
 router.get('/all', productsController.allProducts);
+router.post('/paginate/all', productsController.paginateProducts)
 
 
 
