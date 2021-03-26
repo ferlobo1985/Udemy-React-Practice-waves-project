@@ -2,6 +2,9 @@ import { ImageSearch } from '@material-ui/icons';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+
+
 export const WavesButton = (props) => {
     let template = '';
 
@@ -18,6 +21,18 @@ export const WavesButton = (props) => {
             >
                 {props.title}
             </Link>
+        break;
+        case "bag_link":
+                template = 
+                <div
+                    className="bag_link"
+                    onClick={()=>{
+                        props.runAction()
+                    }}
+                    style={{ ...props.style }}
+                >
+                    <AddShoppingCartIcon  style={{ fontSize: props.iconSize }}/>
+                </div>
         break;
         default:
             template='';

@@ -4,6 +4,11 @@ import { renderCardImage , WavesButton} from '../tools';
 const Card = (props)=> {
 
 
+    const handleAddToCart = (item) => {
+        alert('add to cart')
+    }
+
+
     return(
         <div className={`card_item_wrapper ${props.grid ? 'grid_bars':''}`}>
             <div
@@ -29,10 +34,22 @@ const Card = (props)=> {
 
                 <div className="actions">
                     <div className="button_wrapp">
-                        btn
+                        <WavesButton
+                            type="default"
+                            altClass="card_link"
+                            title="View product"
+                            linkTo={`/product_detail/${props.item._id}`}
+                            style={{
+                                fontWeight:'bold'
+                            }}
+                        />
                     </div>
                     <div className="button_wrapp">
-                        btn
+                        <WavesButton
+                            type="bag_link"
+                            runAction={ ()=> handleAddToCart(props.item) }
+                            iconSize="23"
+                        />
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Featured from './featured';
 import SlimPromotion from 'utils/promotions/slim.block';
+import Loader from 'utils/loader';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { productsBySort } from 'store/actions/product.actions';
@@ -31,9 +32,6 @@ const Home = () => {
     },[dispatch])
 
 
-    console.log(bySold)
-    // console.log(byDate)
-
     return(
         <div>
             <Featured/>
@@ -43,10 +41,19 @@ const Home = () => {
                     items={bySold}
                     title="Best selling guitars"
                 />
-            :null}
+            :<Loader/>}
 
 
             <SlimPromotion items={slimPromotion}/>
+
+
+            { byDate ?
+                <CardBlock
+                    items={byDate}
+                    title="Latests guitars on the shop"
+                />
+            :<Loader/>}
+
         </div>
     )
 
