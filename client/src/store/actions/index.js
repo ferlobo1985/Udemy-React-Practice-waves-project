@@ -1,19 +1,16 @@
 import {
-    MY_DOG
+    GET_PROD_BY_SOLD,
+    GET_PROD_BY_DATE
 } from '../types';
 
 
-
-export const myDog = () => {
-
-    const dogVars = {
-        barks:'yes'
-    }
+export const productsBySold = (data) => ({
+    type: GET_PROD_BY_SOLD,
+    payload: data
+})
 
 
-    return {
-        type: MY_DOG,
-        payload: dogVars
-    }
-
-}
+export const productsByDate = (data) => ({
+    type: GET_PROD_BY_DATE,
+    payload: data
+})
