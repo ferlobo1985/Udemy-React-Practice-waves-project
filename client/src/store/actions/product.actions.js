@@ -14,7 +14,6 @@ export const productsBySort = ({ limit,sortBy,order,where}) => {
                 }
             });
 
-        
             switch(where){
                 case 'bySold':
                     dispatch(actions.productsBySold(products.data));

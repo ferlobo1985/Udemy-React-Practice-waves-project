@@ -51,8 +51,6 @@ const deleteProductById = async( _id  ) => {
 
 const allProducts = async(req) => {
 
-    console.log(req.query)
-
     try {
         const products = await Product
         .find({})
