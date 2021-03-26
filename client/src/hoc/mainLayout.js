@@ -14,7 +14,8 @@ const MainLayout = (props) => {
     useEffect(()=>{
         if(notifications && notifications.error){
             const msg = notifications.msg ? notifications.msg : 'Error';
-            showToast('ERROR',msg)
+            showToast('ERROR',msg);
+            ///// 
         }
         if(notifications && notifications.success){
             const msg = notifications.msg ? notifications.msg : 'Good job !!';
