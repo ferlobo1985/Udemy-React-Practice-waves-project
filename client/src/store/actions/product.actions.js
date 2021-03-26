@@ -6,7 +6,7 @@ import axios from "axios"
 export const productsBySort = ({ limit,sortBy,order,where}) => {
     return async(dispatch)=>{
         try{
-            const products = await axios.get(`/api/products/all`,{
+            const products = await axios.get(`/api/products/al`,{
                 params:{
                     limit,
                     sortBy,
@@ -26,6 +26,8 @@ export const productsBySort = ({ limit,sortBy,order,where}) => {
             }
         } catch(error){
             console.log(error)
+            dispatch(actions.successGlobal(error.response.data.message))
+            
         }
     }
 }
