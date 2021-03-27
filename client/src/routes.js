@@ -13,6 +13,7 @@ import Home from './components/home';
 import RegisterLogin from './components/auth'
 
 import Dashboard from './components/dashboard';
+import UserInfo from './components/dashboard/user/info';
 
 
 const Routes = (props) => {
@@ -50,6 +51,7 @@ const Routes = (props) => {
           />
           <MainLayout>
             <Switch>
+              <Route path="/dashboard/user/user_info" component={AuthGuard(UserInfo)} />
               <Route path="/dashboard" component={AuthGuard(Dashboard)} />
               <Route path="/sign_in" component={RegisterLogin} />
               <Route path="/" component={Home} />
