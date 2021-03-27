@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { useFormik } from 'formik'
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
+import { userChangeEmail } from 'store/actions/user.actions'
 
 import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader';
@@ -46,7 +47,8 @@ const EmailStepper = ({users}) => {
             })
         }),
         onSubmit:(values)=>{
-            console.log(values)
+            setLoading(true);
+            dispatch(userChangeEmail(values));
         }
     });
 
@@ -76,6 +78,15 @@ const EmailStepper = ({users}) => {
             Back
         </Button>
     )
+
+
+    useEffect(()=>{
+        if( notifications && notifications.success){
+            closeModal();
+        }
+        setLoading(false);
+    },[notifications])
+
 
 
     return(
