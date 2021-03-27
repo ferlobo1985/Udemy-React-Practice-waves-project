@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import MainLayout from './hoc/mainLayout';
 import Loader from 'utils/loader';
+import AuthGuard from './hoc/authGuard';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userIsAuth ,userSignOut } from 'store/actions/user.actions';
@@ -49,7 +50,7 @@ const Routes = (props) => {
           />
           <MainLayout>
             <Switch>
-              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/dashboard" component={AuthGuard(Dashboard)} />
               <Route path="/sign_in" component={RegisterLogin} />
               <Route path="/" component={Home} />
             </Switch>
