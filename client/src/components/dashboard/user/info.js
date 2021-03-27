@@ -6,7 +6,7 @@ import { errorHelper } from 'utils/tools';
 
 import { useDispatch } from 'react-redux';
 import { TextField,Button } from '@material-ui/core';
-
+import { userUpdateProfile } from 'store/actions/user.actions';
 
 
 const UserInfo = ({users}) => {
@@ -29,7 +29,7 @@ const UserInfo = ({users}) => {
             .required('Sorry, you need the lastname'),
         }),
         onSubmit:(values)=>{
-            console.log(values)
+           dispatch(userUpdateProfile(values))
         }
     });
 

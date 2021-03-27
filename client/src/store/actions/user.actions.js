@@ -45,10 +45,7 @@ export const userIsAuth = () => {
             if(!getTokenCookie()){
                 throw new Error();
             }
-
             const user = await axios.get(`/api/auth/isauth`, getAuthHeader());
-
-            console.log(user)
 
             dispatch(actions.userAuthenticate({data: user.data,auth: true}))
         } catch(error){
@@ -64,3 +61,23 @@ export const userSignOut = () => {
         dispatch(actions.successGlobal('Good bye !!'))
     }
 }
+
+export const userUpdateProfile = (data) => {
+    return async(dispatch, getState )=>{
+        try{
+            const profile =await axios.patch(`/api/users/profile`,{
+                data:data
+            }, getAuthHeader());
+
+            const userData ={
+                ...getState().users.data,
+                firstname: profile.data.firstname,
+                lastname:  profile.data.lastname,
+            }
+            dispatch(actions.userUpdateProfile(userData))
+            dispatch(actions.successGlobal('Profile updated !!'))
+        }catch(error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+} 
