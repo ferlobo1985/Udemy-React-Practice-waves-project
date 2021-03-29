@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productsByPaginate } from 'store/actions/product.actions';
 
 
-const defaultValues = { keywords:'',brand:[], min:0,max:5000,frets:[], page:2 }
+const defaultValues = { keywords:'',brand:[], min:0,max:5000,frets:[], page:1 }
 
 const AdminProducts = (props) => {
     const products = useSelector(state => state.products);
@@ -18,10 +18,20 @@ const AdminProducts = (props) => {
         defaultValues
     )
 
+    const gotoEdit = (id) => {
+        props.history.push(`/dashboard/admin/edit_product/${id}`)
+    } 
+
+
+    const gotoPage = (page) => {
+        setSearchValues({page:page});
+    }
 
     useEffect(()=>{
         dispatch(productsByPaginate(searchValues))
     },[dispatch,searchValues])
+
+
 
 
 
@@ -35,7 +45,9 @@ const AdminProducts = (props) => {
                 <hr/>
                 <ProductsTable
                     prods={products.byPaginate}
-                
+                    prev={(page)=> gotoPage(page)}
+                    next={(page)=> gotoPage(page)}
+                    gotoEdit={(id)=> gotoEdit(id)}
                 />
 
 

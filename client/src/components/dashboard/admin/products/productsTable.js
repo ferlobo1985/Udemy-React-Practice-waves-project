@@ -7,9 +7,17 @@ import Loading from 'utils/loader';
 
 
 const ProductsTable = ({
-    prods
+    prods, prev, next, gotoEdit
 }) => {
     
+    const goToPrevPage = (page) => {
+        prev(page)
+    }
+
+    const goToNextPage = (page) => {
+        next(page)
+    }
+
 
 
     return(
@@ -36,7 +44,7 @@ const ProductsTable = ({
                                         Remove
                                     </td>
                                     <td className="action_btn edit_btn"
-                                        onClick={()=>alert('edit')}
+                                        onClick={()=> gotoEdit(item._id)}
                                     >
                                         Edit
                                     </td>
@@ -48,8 +56,8 @@ const ProductsTable = ({
                     <Pagination>
                         { prods.hasPrevPage ?
                             <>
-                                <Pagination.Prev onClick={()=>alert('prev')}/>
-                                <Pagination.Item onClick={()=>alert('go to prev')}>
+                                <Pagination.Prev onClick={()=> goToPrevPage(prods.prevPage)}/>
+                                <Pagination.Item onClick={()=>goToPrevPage(prods.prevPage)}>
                                     {prods.prevPage}
                                 </Pagination.Item>
                             </>
@@ -58,14 +66,17 @@ const ProductsTable = ({
                         { prods.hasNextPage ?
                             <>
                                 
-                                <Pagination.Item onClick={()=>alert('go to next')}>
+                                <Pagination.Item onClick={()=>goToNextPage(prods.nextPage)}>
                                     {prods.nextPage}
                                 </Pagination.Item>
-                                <Pagination.Next onClick={()=>alert('next')}/>
+                                <Pagination.Next onClick={()=>goToNextPage(prods.nextPage)}/>
                             </>
                         :null}
                     </Pagination>
-                        
+                    <hr/>
+                    <LinkContainer to="/dashboard/admin/add_products">
+                            <Button variant="secondary">Add product</Button>
+                    </LinkContainer>    
                 </>
                 :
                 <Loading/>
