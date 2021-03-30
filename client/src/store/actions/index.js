@@ -12,7 +12,8 @@ import {
     REMOVE_PRODUCT,
     GET_ALL_BRANDS,
     PRODUCT_ADD,
-    CLEAR_PRODUCT_ADD
+    CLEAR_PRODUCT_ADD,
+    GET_PROD_BY_ID
 } from '../types';
 
 
@@ -69,6 +70,11 @@ export const clearProductAdd = () => {
         type:CLEAR_PRODUCT_ADD
     }
 }
+
+export const productsById = (product) => ({
+    type:GET_PROD_BY_ID,
+    payload:product
+})
 
 
 /// BRANDS

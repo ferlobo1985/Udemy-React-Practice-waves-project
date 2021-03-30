@@ -6,12 +6,12 @@ import DashboardLayout from 'hoc/dashboardLayout';
 import { useFormik } from 'formik';
 import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader'
-import { validation } from './formValues'; 
+import { validation, formValues, getValuesToEdit } from './formValues'; 
 
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
-import { productAdd } from 'store/actions/product.actions';
+import { productAdd, productsById } from 'store/actions/product.actions';
 // import { clearProductAdd } from 'store/actions/index'
 
 import { 
@@ -26,23 +26,16 @@ import {
 
 
 const AddProduct = (props) => {
+    const [values,setValues] = useState(formValues);
     const [loading, setLoading] = useState(false);
+    const products = useSelector(state=>state.products);
     const notifications =  useSelector(state=>state.notifications);
     const brands = useSelector(state=>state.brands);
     const dispatch = useDispatch();
 
     const formik = useFormik({
-        initialValues:{
-            model:'',
-            brand:'',
-            frets:'',
-            woodtype:'',
-            description:'',
-            price:'',
-            available:'',
-            shipping:false,
-            images:[]
-        },
+        enableReinitialize:true,
+        initialValues:values,
         validationSchema: validation,
         onSubmit:(values)=>{
            handleSubmit(values)
@@ -79,8 +72,18 @@ const AddProduct = (props) => {
 
 
     useEffect(()=>{
+        const param = props.match.params.id;
         dispatch(getAllBrands());
-    },[dispatch])
+        if(param){
+            dispatch(productsById(param))
+        }
+    },[dispatch, props.match.params.id]);
+
+    useEffect(()=>{
+        if(products && products.byId){
+            setValues(getValuesToEdit(products.byId))
+        }
+    },[products])
 
 
     // useEffect(()=>{

@@ -3,7 +3,8 @@ import {
     GET_PROD_BY_DATE,
     GET_PROD_PAGINATE,
     PRODUCT_ADD,
-    CLEAR_PRODUCT_ADD
+    CLEAR_PRODUCT_ADD,
+    GET_PROD_BY_ID
 } from '../types';
 
 
@@ -19,6 +20,8 @@ export default function productsReducer(state={},action){
             return {...state, lastAdded: action.payload }
         case CLEAR_PRODUCT_ADD:
             return {...state, lastAdded:null }
+        case GET_PROD_BY_ID:
+            return {...state, byId: action.payload }
         default:
             return state
     }
