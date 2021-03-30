@@ -39,7 +39,8 @@ const AddProduct = (props) => {
             description:'',
             price:'',
             available:'',
-            shipping:false
+            shipping:false,
+            images:[]
         },
         validationSchema: validation,
         onSubmit:(values)=>{
@@ -51,6 +52,14 @@ const AddProduct = (props) => {
         setLoading(true);
         dispatch(productAdd(values))
     }
+
+
+    const handlePicValue = (pic) => {
+        const picArray = formik.values.images;
+        picArray.push(pic.url);
+        formik.setFieldValue('images',picArray)
+    }
+
 
 
     useEffect(()=>{
@@ -75,13 +84,17 @@ const AddProduct = (props) => {
     // },[dispatch])
 
 
+console.log(formik.values)
+
     return(
         <DashboardLayout title="Add product">
         { loading ?
             <Loader/>
             :
             <>
-                <PicUpload/>
+                <PicUpload
+                    picValue={(pic)=> handlePicValue(pic)}
+                />
                 <Divider className="mt-3 mb-3"/>
 
                 <form className="mt-3 article_form" onSubmit={formik.handleSubmit}>

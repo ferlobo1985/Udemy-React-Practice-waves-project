@@ -7,7 +7,7 @@ import {  getTokenCookie } from 'utils/tools';
 import Loader from 'utils/loader';
 
 
-const PicUpload = () => {
+const PicUpload = ({picValue}) => {
     const [loading, setLoading] = useState(false);
 
     const formikImg = useFormik({
@@ -26,7 +26,7 @@ const PicUpload = () => {
                     'Authorization':`Bearer ${getTokenCookie()}`
                 }
             }).then( response => {
-                // response.data
+                picValue(response.data);
             }).catch(error =>{
                 alert(error)
             }).finally(()=>{
