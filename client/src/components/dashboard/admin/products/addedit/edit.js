@@ -11,8 +11,8 @@ import { validation, formValues, getValuesToEdit } from './formValues';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
-import { productAdd, productsById } from 'store/actions/product.actions';
-// import { clearProductAdd } from 'store/actions/index'
+import { productEdit, productsById } from 'store/actions/product.actions';
+import { clearCurrentProduct } from 'store/actions/index'
 
 import { 
     TextField,
@@ -44,7 +44,7 @@ const AddProduct = (props) => {
 
     const handleSubmit = (values) => {
         setLoading(true);
-        dispatch(productAdd(values))
+        dispatch(productEdit(values, props.match.params.id))
     }
 
 
@@ -62,13 +62,10 @@ const AddProduct = (props) => {
 
 
     useEffect(()=>{
-        if(notifications && notifications.success){
-            props.history.push('/dashboard/admin/admin_products');
+        if(notifications){
+           setLoading(false)
         } 
-        if(notifications && notifications.error){
-            setLoading(false)
-        }
-    },[notifications, props.history])
+    },[notifications ])
 
 
     useEffect(()=>{
@@ -86,11 +83,11 @@ const AddProduct = (props) => {
     },[products])
 
 
-    // useEffect(()=>{
-    //     return()=>{
-    //         dispatch(clearProductAdd())
-    //     }
-    // },[dispatch])
+    useEffect(()=>{
+        return()=>{
+            dispatch(clearCurrentProduct())
+        }
+    },[dispatch])
 
 
     return(
@@ -239,7 +236,7 @@ const AddProduct = (props) => {
                         color="primary"
                         type="submit"
                     >
-                        Add product
+                       Edit product
                     </Button>   
                 
                 </form>

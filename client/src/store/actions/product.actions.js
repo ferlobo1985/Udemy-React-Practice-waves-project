@@ -79,3 +79,15 @@ export const productsById= (id) => {
         }
     }
 }
+
+export const productEdit = (values, id) => {
+    return async(dispatch)=>{
+        try{
+            await axios.patch(`/api/products/product/${id}`,values,getAuthHeader());
+            
+            dispatch(actions.successGlobal('Update done !!'));
+        } catch(error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
