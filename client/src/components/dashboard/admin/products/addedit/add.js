@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import PicUpload from './upload';
+import PicViewer from './picViewer';
 import DashboardLayout from 'hoc/dashboardLayout';
 
 import { useFormik } from 'formik';
@@ -60,8 +61,13 @@ const AddProduct = (props) => {
         formik.setFieldValue('images',picArray)
     }
 
+    const deletePic = (index) => {
+        const picArray = formik.values.images;
+        picArray.splice(index,1);
+        formik.setFieldValue('images',picArray)
+    }
 
-
+    
     useEffect(()=>{
         if(notifications && notifications.success){
             props.history.push('/dashboard/admin/admin_products');
@@ -84,14 +90,16 @@ const AddProduct = (props) => {
     // },[dispatch])
 
 
-console.log(formik.values)
-
     return(
         <DashboardLayout title="Add product">
         { loading ?
             <Loader/>
             :
             <>
+                <PicViewer
+                    formik={formik}
+                    deletePic={(index)=> deletePic(index)}
+                />
                 <PicUpload
                     picValue={(pic)=> handlePicValue(pic)}
                 />
