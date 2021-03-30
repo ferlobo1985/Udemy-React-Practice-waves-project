@@ -10,7 +10,9 @@ import {
     USER_CHANGE_EMAIL,
     GET_PROD_PAGINATE,
     REMOVE_PRODUCT,
-    GET_ALL_BRANDS
+    GET_ALL_BRANDS,
+    PRODUCT_ADD,
+    CLEAR_PRODUCT_ADD
 } from '../types';
 
 
@@ -56,6 +58,18 @@ export const productsByPaginate = (products) => ({
 export const productRemove = () => ({
     type:REMOVE_PRODUCT
 })
+
+export const productAdd = (product) => ({
+    type: PRODUCT_ADD,
+    payload:product
+})
+
+export const clearProductAdd = () => {
+    return {
+        type:CLEAR_PRODUCT_ADD
+    }
+}
+
 
 /// BRANDS
 

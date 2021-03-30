@@ -8,7 +8,8 @@ import { validation } from './formValues';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBrands } from 'store/actions/brands.actions';
-
+import { productAdd } from 'store/actions/product.actions';
+import { clearProductAdd } from 'store/actions/index'
 
 import { 
     TextField,
@@ -40,14 +41,36 @@ const AddProduct = (props) => {
         },
         validationSchema: validation,
         onSubmit:(values)=>{
-            console.log(values)
+           handleSubmit(values)
         }
     });
+
+    const handleSubmit = (values) => {
+        setLoading(true);
+        dispatch(productAdd(values))
+    }
+
+
+    useEffect(()=>{
+        if(notifications && notifications.success){
+            props.history.push('/dashboard/admin/admin_products');
+        } 
+        if(notifications && notifications.error){
+            setLoading(false)
+        }
+    },[notifications, props.history])
 
 
     useEffect(()=>{
         dispatch(getAllBrands());
     },[dispatch])
+
+
+    // useEffect(()=>{
+    //     return()=>{
+    //         dispatch(clearProductAdd())
+    //     }
+    // },[dispatch])
 
 
     return(
@@ -113,7 +136,7 @@ const AddProduct = (props) => {
                             </Select>
                             {formik.errors.brand && formik.touched.brand ?
                                 <FormHelperText error={true}>
-                                    { formik.error.brand}
+                                    { formik.errors.brand}
                                 </FormHelperText>
                             :null}
                         </FormControl>

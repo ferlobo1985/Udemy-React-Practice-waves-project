@@ -44,13 +44,24 @@ export const productsByPaginate = (args) => {
     }
 }
 
-
-
 export const productRemove = (id) => {
     return async(dispatch)=>{
         try{
             await axios.delete(`/api/products/product/${id}`,getAuthHeader())
             dispatch(actions.productRemove())
+            dispatch(actions.successGlobal());
+        } catch(error){
+            dispatch(actions.errorGlobal(error.response.data.message))
+        }
+    }
+}
+
+export const productAdd = (data) => {
+    return async(dispatch)=>{
+        try{
+            const product= await axios.post(`/api/products/`,data,getAuthHeader())
+
+            dispatch(actions.productAdd(product.data))
             dispatch(actions.successGlobal());
         } catch(error){
             dispatch(actions.errorGlobal(error.response.data.message))
