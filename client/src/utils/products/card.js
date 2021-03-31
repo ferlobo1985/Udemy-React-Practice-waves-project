@@ -2,7 +2,8 @@ import React,{ useState } from 'react';
 import { renderCardImage , WavesButton} from '../tools';
 import AddToCartHandler from 'utils/addToCartHandler';
 
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux';
+import { userAddToCart } from 'store/actions/user.actions';
 
 
 const Card = (props)=> {
@@ -23,7 +24,7 @@ const Card = (props)=> {
             setErrorType('verify');
             return false
         }
-        alert('dispatch')
+        dispatch(userAddToCart(item))
     }
 
 

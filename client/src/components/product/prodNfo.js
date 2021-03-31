@@ -1,14 +1,35 @@
 import React, { useState } from 'react';
 import { WavesButton } from 'utils/tools';
+import AddToCartHandler from 'utils/addToCartHandler';
 
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { userAddToCart } from 'store/actions/user.actions';
 
 
 const ProdNfo = (props) => {
+    const [modal, setModal] = useState(false);
+    const [errorType,setErrorType] = useState(null);
+    const user = useSelector(state=>state.users);
+    const dispatch = useDispatch();
+
+    const handleClose = () => setModal(false);
+    const handleAddToCart = (item) => {
+        if(!user.auth){
+            setModal(true);
+            setErrorType('auth');
+            return false
+        }
+        if(!user.data.verified){
+            setModal(true);
+            setErrorType('verify');
+            return false
+        }
+        dispatch(userAddToCart(item))
+    }
 
 
     const showProdTags = (detail) => (
@@ -32,7 +53,7 @@ const ProdNfo = (props) => {
                 </div>
                 :
                 <div className="tag">
-                    <div><DoneOutlineIcon/></div>
+                    <div><SentimentVeryDissatisfiedIcon/></div>
                     <div className="tag_text">
                         <div>Sorry, product not Available at the moment</div>
                     </div>
@@ -48,7 +69,7 @@ const ProdNfo = (props) => {
             <div className="cart">
                 <WavesButton
                     type="add_to_cart_link"
-                    runAction={() => alert('added to cart')}
+                    runAction={() => handleAddToCart(detail)}
                 />
             </div>
         </div>
@@ -79,6 +100,11 @@ const ProdNfo = (props) => {
             { showProdTags(detail)}
             { showProdActions(detail)}
             { showProdSpecs(detail)}
+            <AddToCartHandler
+                modal={modal}
+                errorType={errorType}
+                handleClose={handleClose}
+            />
 
 
         </div>
