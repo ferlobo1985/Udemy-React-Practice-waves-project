@@ -37,8 +37,34 @@ const ProdNfo = (props) => {
                         <div>Sorry, product not Available at the moment</div>
                     </div>
                 </div>
-
             }
+        </div>
+    )
+
+
+    const showProdActions = (detail) => (
+        <div className="product_actions">
+            <div className="price">$ {detail.price}</div>
+            <div className="cart">
+                <WavesButton
+                    type="add_to_cart_link"
+                    runAction={() => alert('added to cart')}
+                />
+            </div>
+        </div>
+    )
+
+    const showProdSpecs = (detail) => (
+        <div className="product_specifications">
+            <h2>Specs:</h2>
+            <div>
+                <div className="item">
+                    <strong>Frets:</strong> {detail.frets}
+                </div>
+                <div className="item">
+                    <strong>Wood:</strong> {detail.woodtype}
+                </div>
+            </div>
         </div>
     )
 
@@ -51,6 +77,8 @@ const ProdNfo = (props) => {
                 {detail.description}
             </p>
             { showProdTags(detail)}
+            { showProdActions(detail)}
+            { showProdSpecs(detail)}
 
 
         </div>

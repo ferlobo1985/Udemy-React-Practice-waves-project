@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { productsById } from 'store/actions/product.actions';
 import { clearCurrentProduct } from 'store/actions'
 
+import { renderCardImage } from 'utils/tools'
 import Loder from 'utils/loader';
 
 
@@ -38,7 +39,12 @@ const ProductDetail = (props) => {
                     <div className="product_detail_wrapper">
                         <div className="left">
                             <div>
-
+                                <img
+                                    alt="some alt"
+                                    src={renderCardImage(products.byId.images)}
+                                    onClick={()=> alert('show carrousel')}
+                                >
+                                </img>
                             </div>
                         </div>
                         <div className="right">
