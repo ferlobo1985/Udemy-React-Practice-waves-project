@@ -1,11 +1,29 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { renderCardImage , WavesButton} from '../tools';
+import AddToCartHandler from 'utils/addToCartHandler';
+
+import { useSelector,useDispatch } from 'react-redux'
+
 
 const Card = (props)=> {
+    const [modal, setModal] = useState(false);
+    const [errorType,setErrorType] = useState(null);
+    const user = useSelector(state=>state.users);
+    const dispatch = useDispatch();
 
-
+    const handleClose = () => setModal(false);
     const handleAddToCart = (item) => {
-        alert('add to cart')
+        if(!user.auth){
+            setModal(true);
+            setErrorType('auth');
+            return false
+        }
+        if(!user.data.verified){
+            setModal(true);
+            setErrorType('verify');
+            return false
+        }
+        alert('dispatch')
     }
 
 
@@ -52,9 +70,13 @@ const Card = (props)=> {
                         />
                     </div>
                 </div>
-
-
             </div>
+
+            <AddToCartHandler
+                modal={modal}
+                errorType={errorType}
+                handleClose={handleClose}
+            />
 
         </div>
     )

@@ -16,7 +16,6 @@ import {
     Step,
     StepLabel
 } from '@material-ui/core';
-import usersReducer from 'store/reducers/users.reducer';
 
 
 const EmailStepper = ({users}) => {

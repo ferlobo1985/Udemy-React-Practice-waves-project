@@ -1,6 +1,5 @@
 import React from 'react';
 import DashboardLayout from 'hoc/dashboardLayout'
-import usersReducer from 'store/reducers/users.reducer';
 
 
 const UserDashboard = ({users}) => {
