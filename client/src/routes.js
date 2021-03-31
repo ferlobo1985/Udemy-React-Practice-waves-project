@@ -12,6 +12,7 @@ import Footer from './components/navigation/footer';
 import Home from './components/home';
 import RegisterLogin from './components/auth';
 import Shop from './components/shop';
+import ProductDetail from './components/product';
 
 import Dashboard from './components/dashboard';
 import UserInfo from './components/dashboard/user/info';
@@ -59,6 +60,9 @@ const Routes = (props) => {
               <Route path="/dashboard/admin/admin_products" component={AuthGuard(AdminProducts)} />
               <Route path="/dashboard/user/user_info" component={AuthGuard(UserInfo)} />
               <Route path="/dashboard" component={AuthGuard(Dashboard)} />
+
+              
+              <Route path="/product_detail/:id" component={ProductDetail} />
               <Route path="/shop" component={Shop} />
               <Route path="/sign_in" component={RegisterLogin} />
               <Route path="/" component={Home} />
