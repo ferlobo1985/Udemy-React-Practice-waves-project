@@ -106,6 +106,7 @@ const paginateProducts = async(req) => {
             });
         }
 
+
         if(req.body.frets && req.body.frets.length > 0){
             aggQueryArray.push({
                 $match:{ frets: { $in: req.body.frets }}

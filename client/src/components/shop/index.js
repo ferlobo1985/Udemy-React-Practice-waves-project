@@ -35,10 +35,19 @@ const Shop = () => {
         setSearchValues({ keywords: '', page:1 })
     }
 
-
     const handleKeywords = (values) => {
         setSearchValues({ keywords: values, page:1 })
     }
+
+    const handleFilters = (filters,category) => {
+        if(category === 'brands'){
+            setSearchValues({ brand: filters, page:1 })
+        }
+        if(category === 'frets'){
+            setSearchValues({ frets: filters, page:1 })
+        }
+    }
+
 
     useEffect(()=>{
         dispatch(getAllBrands())
@@ -65,7 +74,18 @@ const Shop = () => {
                             initState={true}
                             title="Brands"
                             list={brands.all}
-                            handleFilters={(filters)=> handleFilters()}
+                            handleFilters={(filters)=> handleFilters(filters,'brands')}
+                        />
+                         <CollapseCheckbox
+                            initState={false}
+                            title="Frets"
+                            list={[
+                                {_id:20,name:20},
+                                {_id:21,name:21},
+                                {_id:22,name:22},
+                                {_id:24,name:24},
+                            ]}
+                            handleFilters={(filters)=> handleFilters(filters,'frets')}
                         />
                         collapse frets
                         range select
