@@ -7,7 +7,6 @@ import { getAllBrands } from 'store/actions/brands.actions';
 import GridOffIcon from '@material-ui/icons/GridOff';
 import GridOnIcon from '@material-ui/icons/GridOn';
 
-
 const defaultValues = { keywords:'',brand:[], min:0,max:100000,frets:[], page:1 }
 
 const Shop = () => {
@@ -63,9 +62,12 @@ const Shop = () => {
                                 </div>
                             </div>
                             <div>
-                                { byPaginate }
-
-
+                                { byPaginate && byPaginate.docs ?
+                                    <>
+                                       
+                                    </>
+                                    :null
+                                }
                             </div>
                             
                         </div>
