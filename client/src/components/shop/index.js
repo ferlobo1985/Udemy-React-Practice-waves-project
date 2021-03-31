@@ -2,6 +2,7 @@ import React,{ useEffect, useReducer, useState } from 'react';
 import CardBlocks from 'utils/products/card.blocks'; 
 import PaginateNav from 'utils/paginateNav';
 import SearchBar from './searchBar';
+import CollapseCheckbox from './collapseCheckbox';
 
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -39,8 +40,6 @@ const Shop = () => {
         setSearchValues({ keywords: values, page:1 })
     }
 
-
-
     useEffect(()=>{
         dispatch(getAllBrands())
     },[dispatch]);
@@ -62,7 +61,12 @@ const Shop = () => {
             <div className="container">
                 <div className="shop_wrapper">
                     <div className="left">
-                        collapse brand
+                        <CollapseCheckbox
+                            initState={true}
+                            title="Brands"
+                            list={brands.all}
+                            handleFilters={(filters)=> handleFilters()}
+                        />
                         collapse frets
                         range select
                     </div>
