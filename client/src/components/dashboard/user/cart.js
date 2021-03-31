@@ -95,6 +95,9 @@ const UserCart = (props) => {
                                 console.log(data)
                                 setLoading(true);
                             }}
+                            onCancel={(data)=>{
+                                setLoading(false);
+                            }}
                         />
                     </div>
                     }
