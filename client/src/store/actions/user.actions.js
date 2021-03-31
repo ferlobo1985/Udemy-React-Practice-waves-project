@@ -133,7 +133,7 @@ export const removeFromCart = (position) => {
 }  
 
 
-export const usePurchaseSuccess = (orderID) => {
+export const userPurchaseSuccess = (orderID) => {
     return async(dispatch)=>{
         try{
             const user = await axios.post(`/api/transaction/`,{
@@ -141,7 +141,7 @@ export const usePurchaseSuccess = (orderID) => {
             },getAuthHeader());
 
             dispatch(actions.successGlobal('Thank you !!'));
-            dispatch(actions.usePurchaseSuccess(user.data))
+            dispatch(actions.userPurchaseSuccess(user.data))
         } catch(error){
             dispatch(actions.errorGlobal(error.response.data.message))
         }

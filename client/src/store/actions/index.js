@@ -47,7 +47,7 @@ export const userAddToCart = (data) => ({
     payload:data
 })
 
-export const usePurchaseSuccess = (data) => ({
+export const userPurchaseSuccess = (data) => ({
     type:PURCHASE_SUCCESS,
     payload:data
 })

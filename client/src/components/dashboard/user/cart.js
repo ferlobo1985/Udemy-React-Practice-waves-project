@@ -4,7 +4,7 @@ import Loader from 'utils/loader';
 import CartDetail from './cartDetail';
 
 import { useDispatch,useSelector} from 'react-redux';
-import { removeFromCart } from 'store/actions/user.actions';
+import { removeFromCart, userPurchaseSuccess } from 'store/actions/user.actions';
 
 import { PayPalButton } from 'react-paypal-button-v2';
 
@@ -91,8 +91,9 @@ const UserCart = (props) => {
                                 })
                             }}
                             onSuccess={(details,data)=>{
-                                console.log(details)
-                                console.log(data)
+                                // console.log(details)
+                                // console.log(data)
+                                dispatch(userPurchaseSuccess(details.id))
                                 setLoading(true);
                             }}
                             onCancel={(data)=>{
