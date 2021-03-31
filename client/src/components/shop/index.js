@@ -1,4 +1,7 @@
 import React,{ useEffect, useReducer, useState } from 'react';
+import CardBlocks from 'utils/products/card.blocks'; 
+import PaginateNav from 'utils/paginateNav'
+
 
 import { useDispatch, useSelector } from 'react-redux'
 import { productsByPaginate } from 'store/actions/product.actions';
@@ -23,6 +26,16 @@ const Shop = () => {
     
     const handleGrid = () => setGrid(!grid);
 
+    const goToPage = (page) => {
+
+console.log(page)
+
+        setSearchValues({ page: page })
+    }
+
+    const handleResetSearch = () => {
+        setSearchValues({ keywords: '' })
+    }
 
     useEffect(()=>{
         dispatch(getAllBrands())
@@ -31,7 +44,7 @@ const Shop = () => {
 
     useEffect(()=>{
         dispatch(productsByPaginate(searchValues))
-    },[setSearchValues,dispatch])
+    },[searchValues,dispatch])
 
     return(
         <div className="page_container">
@@ -41,7 +54,7 @@ const Shop = () => {
                 </div>
             </div>
             <div className="container">
-                <div className="show_wrapper">
+                <div className="shop_wrapper">
                     <div className="left">
                         collapse brand
                         collapse frets
@@ -64,7 +77,17 @@ const Shop = () => {
                             <div>
                                 { byPaginate && byPaginate.docs ?
                                     <>
-                                       
+                                      <CardBlocks
+                                        grid={grid}
+                                        items={byPaginate.docs}
+                                        shop={true}
+                                      />
+                                      <PaginateNav
+                                        prods={byPaginate}
+                                        prev={(page)=>goToPage(page)}
+                                        next={(page)=>goToPage(page)}
+                                        resetSearch={()=>handleResetSearch()}
+                                      />
                                     </>
                                     :null
                                 }
