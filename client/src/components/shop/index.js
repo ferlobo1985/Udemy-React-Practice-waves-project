@@ -1,6 +1,7 @@
 import React,{ useEffect, useReducer, useState } from 'react';
 import CardBlocks from 'utils/products/card.blocks'; 
-import PaginateNav from 'utils/paginateNav'
+import PaginateNav from 'utils/paginateNav';
+import SearchBar from './searchBar';
 
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,17 +26,20 @@ const Shop = () => {
 
     
     const handleGrid = () => setGrid(!grid);
-
     const goToPage = (page) => {
-
-console.log(page)
-
         setSearchValues({ page: page })
     }
 
     const handleResetSearch = () => {
-        setSearchValues({ keywords: '' })
+        setSearchValues({ keywords: '', page:1 })
     }
+
+
+    const handleKeywords = (values) => {
+        setSearchValues({ keywords: values, page:1 })
+    }
+
+
 
     useEffect(()=>{
         dispatch(getAllBrands())
@@ -50,7 +54,9 @@ console.log(page)
         <div className="page_container">
             <div className="page_top">
                 <div className="container">
-                    FORM
+                    <SearchBar
+                        handleKeywords={(values)=> handleKeywords(values)}
+                    />
                 </div>
             </div>
             <div className="container">

@@ -26,7 +26,7 @@ const PaginationComponent = ({
                         </Pagination.Item>
                     </>
                     :null}
-                    <Pagination.Item> {prods.page} </Pagination.Item>
+                    <Pagination.Item active> {prods.page} </Pagination.Item>
                     { prods.hasNextPage ? 
                     <>
                        <Pagination.Item onClick={()=> goToNextPage(prods.nextPage)}>
