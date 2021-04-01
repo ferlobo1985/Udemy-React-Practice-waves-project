@@ -17,7 +17,8 @@ import {
     CLEAR_CURRENT_PRODUCT,
     USER_ADD_TO_CART,
     PURCHASE_SUCCESS,
-    GET_SITE_VARS
+    GET_SITE_VARS,
+    UPDATE_SITE_VARS
 } from '../types';
 
 
@@ -131,4 +132,8 @@ export const siteGetVars = (vars) => ({
     payload: vars
 })
 
+export const updateSiteVars = (vars) => ({
+    type:UPDATE_SITE_VARS,
+    payload: vars
+})
 

@@ -29,3 +29,4 @@ export const GET_ALL_BRANDS = 'get_all_brands'
 
 //site
 export const GET_SITE_VARS = 'get_site_vars';
+export const UPDATE_SITE_VARS = 'update_site_vars'
