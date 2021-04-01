@@ -4,10 +4,10 @@ import ContactsIcon from '@material-ui/icons/Contacts';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
-//import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Footer = () => {
-    
+    const site = useSelector(state=>state.site);
 
     return(
         <footer className="bck_b_dark">
@@ -15,6 +15,7 @@ const Footer = () => {
                 <div className="logo">
                     WAVES
                 </div>
+                { site && site.vars ? 
                 <div className="wrapper">
                     <div className="left">
                         <h2>Contact information</h2>
@@ -23,28 +24,28 @@ const Footer = () => {
                                 <ContactsIcon/>
                                 <div className="nfo">
                                     <div>Address</div>
-                                    <div>Some street 222</div>
+                                    <div>{site.vars.address}</div>
                                 </div>
                             </div>
                             <div className="tag">
                                 <TimelapseIcon/>
                                 <div className="nfo">
                                     <div>Phone</div>
-                                    <div>27287912323</div>
+                                    <div>{site.vars.phone}</div>
                                 </div>
                             </div>
                             <div className="tag">
                                 <PhoneIcon/>
                                 <div className="nfo">
                                     <div>Working hours</div>
-                                    <div>always closed</div>
+                                    <div>{site.vars.hours}</div>
                                 </div>
                             </div>
                             <div className="tag">
                                 <EmailIcon/>
                                 <div className="nfo">
                                     <div>Email</div>
-                                    <div>waves@gmail.com</div>
+                                    <div>{site.vars.email}</div>
                                 </div>
                             </div>
                         </div>
@@ -58,6 +59,8 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
+                :null}
+
             </div>
         </footer>
     )

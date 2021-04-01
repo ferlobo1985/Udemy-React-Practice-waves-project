@@ -16,7 +16,8 @@ import {
     GET_PROD_BY_ID,
     CLEAR_CURRENT_PRODUCT,
     USER_ADD_TO_CART,
-    PURCHASE_SUCCESS
+    PURCHASE_SUCCESS,
+    GET_SITE_VARS
 } from '../types';
 
 
@@ -122,5 +123,12 @@ export const clearNotification = () => {
         })
     }
 } 
+
+//// SITE 
+
+export const siteGetVars = (vars) => ({
+    type:GET_SITE_VARS,
+    payload: vars
+})
 
 
