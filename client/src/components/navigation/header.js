@@ -18,9 +18,12 @@ const Header = ({users, signOutUser}) => {
                         { users.auth ?
                             <>
                                 <div className="cart_link">
-                                    <span>1</span>
-                                    <Link to="/dashboard/user/user_cart">
-                                        My cart
+                                    {users.cart && users.cart.length > 0 ? 
+                                        <span>{users.cart.length}</span>
+                                    :null}
+                                
+                                    <Link to='/dashboard/user/user_cart'>
+                                        My Cart
                                     </Link>
                                 </div>
 
